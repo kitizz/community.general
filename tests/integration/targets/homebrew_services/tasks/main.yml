@@ -27,6 +27,10 @@
         that:
           - install_result is success
 
+    - command: brew services info black --json
+      become: true
+      become_user: "{{ brew_stat.stat.pw_name }}"
+
     - name: Start the black service
       community.general.homebrew_services:
         name: black
